@@ -1,0 +1,77 @@
+{
+    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+    "version": "1.0.0",
+    "manifestVersion": "1.16",
+    "id": "d9a9ecc5-a386-47be-a1cd-d119f2100673",
+    "packageName": "com.package.name",
+    "name": {
+        "short": "multitenant-bot",
+        "full": "multitenant-bot"
+    },
+    "developer": {
+        "name": "SUTD-UROP",
+        "mpnId": "",
+        "websiteUrl": "https://kind-cliff-037badd00.2.azurestaticapps.net/",
+        "privacyUrl": "https://kind-cliff-037badd00.2.azurestaticapps.net/",
+        "termsOfUseUrl": "https://kind-cliff-037badd00.2.azurestaticapps.net/"
+    },
+    "description": {
+        "short": "this bot can send allow you to send anonymous questions to a channel",
+        "full": "A user can send a personal message to this bot, a question. Then the user can specify a channel that he wants the message to be sent to. The bot sends the message to that channel, and others can view it, and reply to it, but the original author of the question remains anonymous."
+    },
+    "icons": {
+        "outline": "outline.png",
+        "color": "color.png"
+    },
+    "accentColor": "#FFFFFF",
+    "staticTabs": [
+        {
+            "entityId": "conversations",
+            "scopes": [
+                "personal"
+            ]
+        },
+        {
+            "entityId": "about",
+            "scopes": [
+                "personal"
+            ]
+        }
+    ],
+    "bots": [
+        {
+            "botId": "f3ca1bc9-f15d-4193-8e96-59229eded721",
+            "scopes": [
+                "personal",
+                "team",
+                "groupChat"
+            ],
+            "commandLists": [
+                {
+                    "commands": [
+                        {
+                            "title": "/start",
+                            "description": "command to start the bot"
+                        },
+                        {
+                            "title": "/help",
+                            "description": "get info about the bot and steps in using it"
+                        }
+                    ],
+                    "scopes": [
+                        "personal"
+                    ]
+                }
+            ],
+            "isNotificationOnly": false,
+            "supportsCalling": true,
+            "supportsVideo": true,
+            "supportsFiles": true
+        }
+    ],
+    "validDomains": [],
+    "webApplicationInfo": {
+        "id": "f3ca1bc9-f15d-4193-8e96-59229eded721",
+        "resource": ""
+    }
+}
