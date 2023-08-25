@@ -3,9 +3,9 @@
 This bot can be used to send anonymous messages to teams channels.
 
 ## How to use this bot
-A user can message this bot personally, in a personal teams chat with the bot. The user then needs to specify a team and channel for the bot to send an anonymous message to. The bot will then send the mssage to the team on the user's behalf. 
+Demo can be found [here](https://www.youtube.com/watch?v=gHB4X5Tunrk)
 
-This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to create a simple bot that accepts input from the user and echoes it back.
+A user can message this bot personally, in a personal teams chat with the bot. The user then needs to specify a team and channel for the bot to send an anonymous message to. The bot will then send the mssage to the team on the user's behalf, while hiding the user's identity.
 
 ## Prerequisites
 
@@ -15,10 +15,11 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
     # determine node version
     node --version
     ```
-2. [Microsoft Graph API](https://learn.microsoft.com/en-us/graph/use-the-api) for retrieving the teams and channels that the user is a part of 
-* 'Team.ReadBasic.All'
-* 'User.Read.All'
-3. [Azure App Service](https://azure.microsoft.com/en-us/products/app-service/) for hosting the NodeJS server
+2. [Microsoft Graph API](https://learn.microsoft.com/en-us/graph/use-the-api) for retrieving the teams and channels that the user is a part of.
+The following Graph API **Application Permissions** must be granted to the app:
+* `Channel.ReadBasic.All`
+* `Team.ReadBasic.All`
+3. [Azure App Service](https://azure.microsoft.com/en-us/products/app-service/) for hosting the bot's server.
 4. [Azure Bot Resource](https://learn.microsoft.com/en-us/azure/bot-service/abs-quickstart?view=azure-bot-service-4.0&tabs=userassigned) to register your bot with Azure Bot Services and to connect your bot to channels, in this case MS teams
 ## To run the bot
 
