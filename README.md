@@ -3,10 +3,14 @@
 This bot can be used to send anonymous messages to teams channels.
 
 ## How to use this bot
-Demo can be found [here](https://www.youtube.com/watch?v=gHB4X5Tunrk)
+Demo of the bot can be found [here](https://www.youtube.com/watch?v=gHB4X5Tunrk)
 
-A user can message this bot personally, in a personal teams chat with the bot. The user then needs to specify a team and channel for the bot to send an anonymous message to. The bot will then send the mssage to the team on the user's behalf, while hiding the user's identity.
+Unfortunately, the bot has not been configured for the public to use, due to the graph APi permissions required.
 
+A user can start a personal teams chat with this bot. The user then needs to specify a team and channel for the bot to send an anonymous message to. The bot will then send the mssage to the channel on the user's behalf, while hiding the user's identity.
+Commands:
+'/start' : begin dialogue with bot, bot will prompt user to choose a team
+'/help' : get information on how to use the bot
 ## Prerequisites
 
 1. [Node.js](https://nodejs.org) version 10.14.1 or higher
@@ -15,25 +19,13 @@ A user can message this bot personally, in a personal teams chat with the bot. T
     # determine node version
     node --version
     ```
-2. [Microsoft Graph API](https://learn.microsoft.com/en-us/graph/use-the-api) for retrieving the teams and channels that the user is a part of.
+2. [Azure Active Directory](https://learn.microsoft.com/bs-latn-ba/azure/active-directory/fundamentals/)
+3. [Microsoft Graph API](https://learn.microsoft.com/en-us/graph/use-the-api) for retrieving the teams and channels that the user is a part of.
 The following Graph API **Application Permissions** must be granted to the app:
 * `Channel.ReadBasic.All`
 * `Team.ReadBasic.All`
-3. [Azure App Service](https://azure.microsoft.com/en-us/products/app-service/) for hosting the bot's server.
-4. [Azure Bot Resource](https://learn.microsoft.com/en-us/azure/bot-service/abs-quickstart?view=azure-bot-service-4.0&tabs=userassigned) to register your bot with Azure Bot Services and to connect your bot to channels, in this case MS teams
-## To run the bot
-
-- Install modules
-
-    ```bash
-    npm install
-    ```
-
-- Start the bot
-
-    ```bash
-    npm start
-    ```
+4. [Azure App Service](https://azure.microsoft.com/en-us/products/app-service/) for hosting the bot's server.
+5. [Azure Bot Resource](https://learn.microsoft.com/en-us/azure/bot-service/abs-quickstart?view=azure-bot-service-4.0&tabs=userassigned) to register your bot with Azure Bot Services and to connect your bot to channels, in this case MS teams
 
 ## Testing the bot using Bot Framework Emulator
 
@@ -46,7 +38,7 @@ The following Graph API **Application Permissions** must be granted to the app:
 - Launch Bot Framework Emulator
 - File -> Open Bot
 - Enter a Bot URL of `http://localhost:3978/api/messages`
-
+Warning: Running the bot with the emulator will not allow you to message a teams channel.
 ## Deploy the bot to Azure
 
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
@@ -63,7 +55,6 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 - [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
 - [Azure CLI](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest)
 - [Azure Portal](https://portal.azure.com)
-- [Language Understanding using LUIS](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/)
 - [Channels and Bot Connector Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-concepts?view=azure-bot-service-4.0)
 - [Restify](https://www.npmjs.com/package/restify)
 - [dotenv](https://www.npmjs.com/package/dotenv)

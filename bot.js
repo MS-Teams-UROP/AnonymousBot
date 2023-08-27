@@ -15,26 +15,29 @@ const texts = require('./public/docs/texts.json');
 class AnonymousBot extends TeamsActivityHandler {
     constructor() {
         super();
+        //store user's identity and channel choices in an instance of Graph
         this._graph = new Graph();
         this.onMessage(async (context, next) => {
             const messageText = context.activity.text.trim();
-            /*give user info about the bot */
+            //give user info about the bot
             if (messageText === '/help') {
+                //a stock message stored in /public/docs/texts.json
                 const helpText = texts.help;
                 await context.sendActivity(MessageFactory.text(helpText, helpText));
             }
-            /*let user choose which team to post question to */
+            //let user choose which team to post question to 
             else if (messageText === '/start') {
+                //reset the user's teams and channels choices
                 this._graph.resetAllFields();
                 var teams = [];
+                //populate the user's name and id
                 const id = context.activity.from.aadObjectId;
                 const name = context.activity.from.name;
-                // const id = 'a495e614-3794-4de3-847e-d2b6d4856c0b';
-                // const name = 'conard samlu';
                 const user = {
                     name: name,
                     id: id
                 };
+                //assign user's identity to this._graph
                 this._graph.setUser(user);
                 await this._graph.getJoinedTeams()
                     .then(async (retrievedTeams) => {
@@ -62,12 +65,12 @@ class AnonymousBot extends TeamsActivityHandler {
 
             }
             else if (messageText.startsWith('send_message/')) {
-                //for now test using a known teamsChannelId
-                //Replace with teamsChannelId retrieved from some database, or Microsoft Graph
+                //Allow user to send a message now
                 const nameAndId = messageText.slice(messageText.indexOf('/') + 1, messageText.length);
                 const channel = this.createNameAndIdObject(nameAndId);
                 this._graph.setChosenChannel(channel);
                 console.log(this._graph.getChosenChannel().id);
+                //Prompt for user to send a message to the chosen channel and team
                 const messageCard = CardFactory.heroCard(
                     'Send an <b>anonymous</b> message',
                     'Now you are ready to send your message in this chat. Your message will be routed to the channel' + ' <b>' + this._graph.getChosenChannel().name + '</b> in the team ' + '<b>' + this._graph.getChosenTeam().name + '</b>.If you want to change the team or channel, send <b>/start</b> again to restart the selection process.',
@@ -78,6 +81,7 @@ class AnonymousBot extends TeamsActivityHandler {
                 await context.sendActivity(message);
             }
             else {
+                //Now we can send the message
                 if (!this._graph.getChosenChannel()) {
                     await context.sendActivity(MessageFactory.text('Select a team and channel first. Send a **/start** command to begin choosing.'));
                 }
@@ -120,7 +124,6 @@ class AnonymousBot extends TeamsActivityHandler {
     }
     async cardActivityAsync(context, genericList, typeOfCard) {
         var cardActions = new Array(genericList.length);
-        // console.log(genericList);
         var trailingText = '';
         if (typeOfCard === 'channels')
             trailingText = 'send_message/';
@@ -138,6 +141,7 @@ class AnonymousBot extends TeamsActivityHandler {
             newCardAction.text = trailingText + genericList[idx].id + '/' + genericList[idx].displayName;
             cardActions[idx] = newCardAction;
         }
+        //see https://learn.microsoft.com/en-us/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0
         if (typeOfCard === 'channels')
             await this.sendChannelCard(context, cardActions);
         else if (typeOfCard == 'teams')

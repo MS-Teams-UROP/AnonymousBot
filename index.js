@@ -31,7 +31,16 @@ server.listen(process.env.port || process.env.PORT || 3978, () => {
     console.log('\nGet Bot Framework Emulator: https://aka.ms/botframework-emulator');
     console.log('\nTo talk to your bot, open the emulator select "Open Bot"');
 });
-
+//login using bot's credentials
+//credentials stored on this bot's app service app settings
+/*  
+    structure of credentials
+    {
+        MicrosoftAppType="MultiTenant"
+        MicrosoftAppId= <azure-bot-reource-app-id>
+        MicrosoftAppPassword= <azure-bot-resource-app-passowrd>
+    }
+*/
 const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication(process.env);
 
 // Create adapter.
@@ -70,7 +79,7 @@ server.post('/api/messages', async (req, res) => {
     // Route received a request to adapter for processing
     await adapter.process(req, res, async (context) => await myBot.run(context));
 });
-//for testing graph api
+//following routes are only for testing graph api
 server.post('/api/graph/teams', async (req, res) => {
     myGraph.setUserId(req.body.id);
     await myGraph.getJoinedTeams()

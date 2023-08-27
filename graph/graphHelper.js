@@ -8,7 +8,7 @@ const authProviders =
 let _settings = undefined;
 let _clientSecretCredential = undefined;
 let _appClient = undefined;
-
+//Login using the app credentials
 function ensureGraphForAppOnlyAuth(settings) {
     _settings = settings
     // Ensure settings isn't null
@@ -34,19 +34,20 @@ function ensureGraphForAppOnlyAuth(settings) {
         });
     }
 }
-
+//Retrieving user's joined teams
 async function retrieveJoinedTeamsAsync(userId) {
     return _appClient?.api('/users/' + userId + '/joinedTeams')
         .get();
 }
+//retrieving user's joined channels
 async function retrieveChannelsAsync(teamId) {
     return _appClient.api('/teams/' + teamId + '/channels')
         .get();
 }
+//retrieving user's conversations (currently not used)
 async function retrieveConversationsAsync(channelId) {
     return _appClient.api('/groups/' + channelId + '/conversations').get()
 }
-//Functions below are for scopes using application permissions 
 async function retrieveUsersAsync() {
     return _appClient?.api('/users')
         .select(['displayName', 'id', 'mail'])
